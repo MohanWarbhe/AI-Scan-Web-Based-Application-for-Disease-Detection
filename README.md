@@ -55,3 +55,72 @@ This project demonstrates the real-world application of **AI in medical healthca
 
 ## 📂 Project Structure
 
+AI-Scan-Web-Based-Application-for-Disease-Detection/
+│
+├── app.py # Main Flask application
+├── model/ # Trained ML model
+├── templates/ # HTML files
+├── static/ # CSS, JS, images
+├── utils/ # Helper functions
+├── requirements.txt # Python dependencies
+├── .gitignore # Ignored files
+└── README.md # Project documentation
+
+
+---
+
+## 🔄 Application Workflow (How It Works)
+
+1️⃣ **User uploads medical image**  
+2️⃣ Image is **preprocessed** (resize, normalization)  
+3️⃣ Image is passed to **trained ML model**  
+4️⃣ Model predicts disease class  
+5️⃣ Result is displayed on the web interface  
+
+---
+
+## 🧠 Core Prediction Logic (Sample Code)
+
+python
+from tensorflow.keras.models import load_model
+import cv2
+import numpy as np
+
+model = load_model("model/disease_model.h5")
+
+def predict_disease(image_path):
+    img = cv2.imread(image_path)
+    img = cv2.resize(img, (224, 224))
+    img = img / 255.0
+    img = np.reshape(img, (1, 224, 224, 3))
+    prediction = model.predict(img)
+    return prediction
+
+## 👨‍💻 Author & Contact
+
+**Mohan Warbhe**  
+🎓 Computer Science & Design  
+💡 AI | Machine Learning | Python | Web Development  
+
+📧 **Email:** [mohan.warbhe.work@gmail.com](mailto:mohan.warbhe.work@gmail.com)  
+
+🔗 **GitHub:** https://github.com/MohanWarbhe
+
+
+
+# Clone repository
+git clone https://github.com/MohanWarbhe/AI-Scan-Web-Based-Application-for-Disease-Detection.git
+
+# Go to project directory
+cd AI-Scan-Web-Based-Application-for-Disease-Detection
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+
+
+
+
+
