@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Prediction</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="fixed-top py-3 bg-white shadow-sm">
+    <div class="container text-center">
+        <h3 class="fw-bold mb-0">
+            Skin Disease Prediction 🧬
+        </h3>
+    </div>
+</header>
+
+<!-- MAIN -->
+<section class="check" style="margin-top:160px;">
+    <div class="container text-center">
+
+        <h2 class="mb-4 text-primary">Upload Skin Image</h2>
+
+        <!-- FORM -->
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+
+            <!-- FILE INPUT -->
+            <input type="file"
+                   name="image"
+                   id="real-file"
+                   hidden
+                   required
+                   onchange="previewImage(event)">
+
+            <button type="button"
+                class="btn btn-primary px-4 mb-3"
+                onclick="document.getElementById('real-file').click()">
+                Choose Skin Image
+            </button>
+
+            <!-- IMAGE PREVIEW (CENTERED FIX) -->
+            <div class="mt-3 text-center">
+                <img id="preview"
+                     src=""
+                     class="img-fluid rounded shadow d-block mx-auto"
+                     style="max-width:300px; display:none;">
+            </div>
+
+            <br>
+
+            <button type="submit" class="btn btn-success px-5">
+                Predict Disease
+            </button>
+        </form>
+
+        <!-- RESULT (AFTER PREDICTION) -->
+        {% if prediction %}
+        <div class="mt-5">
+            <hr>
+            <h4 class="text-success mb-2">Prediction Result</h4>
+            <p class="fs-5"><strong>{{ prediction }}</strong></p>
+
+            <img src="{{ image_url }}"
+                class="img-fluid rounded shadow mt-3 d-block mx-auto"
+                style="max-width:320px;">
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<!-- IMAGE PREVIEW SCRIPT -->
+<script>
+function previewImage(event) {
+    const preview = document.getElementById("preview");
+    preview.src = URL.createObjectURL(event.target.files[0]);
+    preview.style.display = "block";
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
